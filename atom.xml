@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-10T12:32:30.867Z</updated>
+  <updated>2019-10-10T15:46:51.511Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue深入响应式原理</title>
+    <link href="http://yoursite.com/2019/10/10/Vue%E6%B7%B1%E5%85%A5%E5%93%8D%E5%BA%94%E5%BC%8F%E5%8E%9F%E7%90%86/"/>
+    <id>http://yoursite.com/2019/10/10/Vue深入响应式原理/</id>
+    <published>2019-10-10T15:46:17.000Z</published>
+    <updated>2019-10-10T15:46:51.511Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="理解Vue响应式原理-只需通过解决以下几个问题即可"><a href="#理解Vue响应式原理-只需通过解决以下几个问题即可" class="headerlink" title="理解Vue响应式原理,只需通过解决以下几个问题即可"></a>理解Vue响应式原理,只需通过解决以下几个问题即可</h3><ul><li>如何对this.xxx的访问代理到this.data.xxx上?</li><li>如何实现数据劫持,监听数据的读写操作?</li><li>如何实现依赖缓存?</li><li>template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁</li><li>如何实现数据修改DOM更新<a id="more"></a><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &#123;&#123; a &#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">let fade = Fade(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;a:&#123; a:1&#125;&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></li></ul><h3 id="问题-如何实现数据劫持"><a href="#问题-如何实现数据劫持" class="headerlink" title="问题:如何实现数据劫持"></a>问题:如何实现数据劫持</h3><p>答:通过Object.defineProperty对data上的key进行操作</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function Fade(options=&#123;&#125;)&#123;</span><br><span class="line">    // TODO:this代表的是fade实例对象</span><br><span class="line">    // TODO:将所有属性挂载到$options</span><br><span class="line">    this.$options = options</span><br><span class="line">    var data = this._data = this.options.data</span><br><span class="line">    observe(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Observe(data)&#123;</span><br><span class="line">   for(let key in data)&#123;</span><br><span class="line">     let val = data[key] </span><br><span class="line">     observe(val)</span><br><span class="line">     // TODO:把data属性通过objecet.defineProperty的方式定义属性</span><br><span class="line">     Object.defineProperty(data,key,&#123;</span><br><span class="line">         enumerable : true,</span><br><span class="line">         get()&#123;</span><br><span class="line">            return val  </span><br><span class="line">         &#125;,</span><br><span class="line">         set(newVal)&#123;// TODO:更改值得时候</span><br><span class="line">            // TODO:设置的值和以前的是一样的东西</span><br><span class="line">            if(newVal === val)&#123;</span><br><span class="line">                return</span><br><span class="line">            &#125;</span><br><span class="line">            // TODO:如果以后在获取值的时候将刚才设置的值丢回去</span><br><span class="line">            val = newVal </span><br><span class="line">            observe(newVal)</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function observe(data)&#123;</span><br><span class="line">    return new Observe(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="问题-如何对this-xxx的访问代理到this-data-xxx上"><a href="#问题-如何对this-xxx的访问代理到this-data-xxx上" class="headerlink" title="问题:如何对this.xxx的访问代理到this.data.xxx上?"></a>问题:如何对this.xxx的访问代理到this.data.xxx上?</h3><p>答:对于每个data上的key,都在app上做一个代理,实际操作的是this.data<br>实现的代码如下:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function Fade(options = &#123;&#125;) &#123;</span><br><span class="line">  // TODO:this代表的是zhufeng实例对象</span><br><span class="line">  // TODO:将所有属性挂载到$options</span><br><span class="line">  this.$options = options</span><br><span class="line">  //this._data</span><br><span class="line">  var data = this._data = this.$options.data</span><br><span class="line">  observe(data)</span><br><span class="line">  // TODO:this代理了this._data</span><br><span class="line">  for (let key in data) &#123;</span><br><span class="line">    Object.defineProperty(this, key, &#123;</span><br><span class="line">      enumerable: true,</span><br><span class="line">      get() &#123;</span><br><span class="line">        return this._data[key] //this.a = &#123;a : 1&#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal) &#123;</span><br><span class="line">        this._data[key] = newVal</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;理解Vue响应式原理-只需通过解决以下几个问题即可&quot;&gt;&lt;a href=&quot;#理解Vue响应式原理-只需通过解决以下几个问题即可&quot; class=&quot;headerlink&quot; title=&quot;理解Vue响应式原理,只需通过解决以下几个问题即可&quot;&gt;&lt;/a&gt;理解Vue响应式原理,只需通过解决以下几个问题即可&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;如何对this.xxx的访问代理到this.data.xxx上?&lt;/li&gt;
+&lt;li&gt;如何实现数据劫持,监听数据的读写操作?&lt;/li&gt;
+&lt;li&gt;如何实现依赖缓存?&lt;/li&gt;
+&lt;li&gt;template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁&lt;/li&gt;
+&lt;li&gt;如何实现数据修改DOM更新
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>了解Object.defineProperty()方法</title>
+    <link href="http://yoursite.com/2019/10/10/%E4%BA%86%E8%A7%A3Object-defineProperty-%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2019/10/10/了解Object-defineProperty-方法/</id>
+    <published>2019-10-10T15:44:19.000Z</published>
+    <updated>2019-10-10T15:45:17.733Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Object-defineProperty-obj-prop-descriptor"><a href="#Object-defineProperty-obj-prop-descriptor" class="headerlink" title="Object.defineProperty(obj,prop,descriptor)"></a>Object.defineProperty(obj,prop,descriptor)</h3><p><strong>1.参数</strong></p><ul><li>obj<br>  要在其上定义属性的对象。</li><li>prop<br>  要定义或修改的属性的名称。</li><li>descriptor<br>  将被定义或修改的属性描述符。</li></ul><p><strong>2.返回值</strong></p><ul><li>被传递给函数的对象obj<a id="more"></a></li></ul><p><strong>3.属性描述符</strong></p><ul><li>configurable //抗飞个弱儿包 可删除</li><li>enumerable //硬牛么儿包 可枚举</li><li>writable //ruai特儿包 可赋值</li><li>value</li><li>get //访问</li><li>set //修改</li></ul><p><strong>注意:</strong></p><ul><li>value和writable与get和set不能共存</li><li>obj.prop 调用get方法</li><li>obj.prop = ‘xxx’ 调用set方法</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Object-defineProperty-obj-prop-descriptor&quot;&gt;&lt;a href=&quot;#Object-defineProperty-obj-prop-descriptor&quot; class=&quot;headerlink&quot; title=&quot;Object.defineProperty(obj,prop,descriptor)&quot;&gt;&lt;/a&gt;Object.defineProperty(obj,prop,descriptor)&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1.参数&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;obj&lt;br&gt;  要在其上定义属性的对象。&lt;/li&gt;
+&lt;li&gt;prop&lt;br&gt;  要定义或修改的属性的名称。&lt;/li&gt;
+&lt;li&gt;descriptor&lt;br&gt;  将被定义或修改的属性描述符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2.返回值&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;被传递给函数的对象obj
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>NVM_Node_NPM_CNPM安装</title>
