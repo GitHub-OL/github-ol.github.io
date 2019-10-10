@@ -8,7 +8,7 @@
   <meta name="description" content>
   <meta name="author" content="John Doe">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="test_my_site">
+  <meta property="og:title" content="NVM,Node,NPM,CNPM安装">
   <meta property="og:description" content>
   <meta property="og:site_name" content="Hexo">
   <meta property="og:type" content="article">
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">test_my_site</p>
+          <p class="title">NVM,Node,NPM,CNPM安装</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2019-10-10</span>
-            <span class="time">13:22:27</span>
+            <span class="time">13:37:58</span>
           </span>
           
         </div>
@@ -108,7 +108,8 @@
         
         <!-- Post Main Content -->
         <div class="post-content">
-          
+          <p>NVM-windows安装<br>第一步:下载NVM安装包:<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a><br>第二步:创建俩个文件目录,解压安装包到NVM目录中:<br>D:\NVM<br>D:\Node<br>第三步:进入NVM目录双击 install.cmd 直接回车<br>第四步:修改setting.txt文件复制到D:\NVM目录中<br>root: D:\NVM<br>path: D:\Node<br>arch: 64<br>proxy: none<br>node_mirror: <a href="http://npm.taobao.org/mirrors/node/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/node/</a><br>npm_mirror: <a href="https://npm.taobao.org/mirrors/npm/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/npm/</a><br>第五步:配置环境变量NVM_HOME和NVM_SYMLINK<br>NVM_HOME : D:\NVM<br>NVM_SYMLINK : D:\Node<br>第六步:path中添加变量<br>%NVM_HOME%<br>%NVM_SYMLINK%<br>第七步:查看NVM版本信息<br>nvm -v<br>Node-windows安装<br>第一步:安装Node(为了后续安装全局npm准备)<br>nvm install 6.15.0<br>第二步:使用Node<br>nvm use 6.15.0<br>第三步:在nvm\node_dir下创建node_cache和node_global文件加<br>第四步配置缓冲路径和全局路径(使C:\Users\yi081.npmrc 】文件重新生成)<br>npm config set prefix “D:\NVM\node_dir\node_global”<br>npm config set cache “D:\NVM\node_dir\node_cache”<br>第五步:配置Node环境变量NODE_HOME和NODE_PATH<br>NODE_HOME:D:\Node\node_modules<br>NODE_GLOBAL:D:\NVM\node_dir\node_global (可不配置)<br>NODE_PATH : D:\NVM\node_dir\node_global\node_modules<br>第六步:添加到path中<br>%NODE_HOME%<br>%NODE_GLOBAL% (可不配置)<br>%NODE_PATH%<br>全局安装NPM<br>第一步:下载npm<br>npm install npm@latest -g<br>第二步:配置NPM环境变量<br>NPM_HOME : D:\NVM\node_dir\node_global\npm<br>第三步:添加到path中<br>%NPM_HOME%<br>全局安装CNPM<br>第一步:下载cnpm<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>第二步:配置CNPM环境变量(可不配置)<br>CNPM_HOME : D:\NVM\node_dir\node_global\cnpm<br>第三步:添加到path中(可不配置)<br>%NPM_HOME%</p>
+
         </div>
       </div>
     </div>
