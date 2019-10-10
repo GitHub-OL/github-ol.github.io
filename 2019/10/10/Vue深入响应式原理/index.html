@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="爱编程,爱挑战,爱学习">
 <meta property="og:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何对this.xxx的访问代理到this.data.xxx上? 如何实现数据劫持,监听数据的读写操作? 如何实现依赖缓存? template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁 如何实现数据修改DOM更新">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-10T15:46:51.511Z">
+<meta property="og:updated_time" content="2019-10-10T15:52:07.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue深入响应式原理">
 <meta name="twitter:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何对this.xxx的访问代理到this.data.xxx上? 如何实现数据劫持,监听数据的读写操作? 如何实现依赖缓存? template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁 如何实现数据修改DOM更新">
@@ -133,7 +133,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -201,11 +201,12 @@
 <li>如何实现数据劫持,监听数据的读写操作?</li>
 <li>如何实现依赖缓存?</li>
 <li>template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁</li>
-<li>如何实现数据修改DOM更新<a id="more"></a>
+<li>如何实现数据修改DOM更新</li>
+</ul>
+<a id="more"></a>
+
 <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &#123;&#123; a &#125;&#125;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">let fade = Fade(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;a:&#123; a:1&#125;&#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <h3 id="问题-如何实现数据劫持"><a href="#问题-如何实现数据劫持" class="headerlink" title="问题:如何实现数据劫持"></a>问题:如何实现数据劫持</h3><p>答:通过Object.defineProperty对data上的key进行操作</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">function Fade(options=&#123;&#125;)&#123;</span><br><span class="line">    // TODO:this代表的是fade实例对象</span><br><span class="line">    // TODO:将所有属性挂载到$options</span><br><span class="line">    this.$options = options</span><br><span class="line">    var data = this._data = this.options.data</span><br><span class="line">    observe(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Observe(data)&#123;</span><br><span class="line">   for(let key in data)&#123;</span><br><span class="line">     let val = data[key] </span><br><span class="line">     observe(val)</span><br><span class="line">     // TODO:把data属性通过objecet.defineProperty的方式定义属性</span><br><span class="line">     Object.defineProperty(data,key,&#123;</span><br><span class="line">         enumerable : true,</span><br><span class="line">         get()&#123;</span><br><span class="line">            return val  </span><br><span class="line">         &#125;,</span><br><span class="line">         set(newVal)&#123;// TODO:更改值得时候</span><br><span class="line">            // TODO:设置的值和以前的是一样的东西</span><br><span class="line">            if(newVal === val)&#123;</span><br><span class="line">                return</span><br><span class="line">            &#125;</span><br><span class="line">            // TODO:如果以后在获取值的时候将刚才设置的值丢回去</span><br><span class="line">            val = newVal </span><br><span class="line">            observe(newVal)</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function observe(data)&#123;</span><br><span class="line">    return new Observe(data)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -218,7 +219,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-10-10T15:46:51.511Z" itemprop="dateUpdated">2019-10-10 23:46:51</time>
+    最終更新：<time datetime="2019-10-10T15:52:07.831Z" itemprop="dateUpdated">2019-10-10 23:52:07</time>
 </span><br>
 
 
@@ -382,7 +383,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
