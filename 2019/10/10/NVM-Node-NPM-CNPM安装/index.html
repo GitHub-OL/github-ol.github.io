@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>NVM,Node,NPM,CNPM安装 | 爱编程,爱挑战,爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="NVM-windows安装第一步:下载NVM安装包:https://github.com/coreybutler/nvm-windows/releases第二步:创建俩个文件目录,解压安装包到NVM目录中:D:\NVMD:\Node第三步:进入NVM目录双击 install.cmd 直接回车第四步:修改setting.txt文件复制到D:\NVM目录中root: D:\NVMpath: D:\No">
+<meta name="keywords" content="C++ Java Php HTML Linux JavaScript Vue Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NVM,Node,NPM,CNPM安装">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/index.html">
+<meta property="og:site_name" content="爱编程,爱挑战,爱学习">
+<meta property="og:description" content="NVM-windows安装第一步:下载NVM安装包:https://github.com/coreybutler/nvm-windows/releases第二步:创建俩个文件目录,解压安装包到NVM目录中:D:\NVMD:\Node第三步:进入NVM目录双击 install.cmd 直接回车第四步:修改setting.txt文件复制到D:\NVM目录中root: D:\NVMpath: D:\No">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-10T07:24:28.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NVM,Node,NPM,CNPM安装">
+<meta name="twitter:description" content="NVM-windows安装第一步:下载NVM安装包:https://github.com/coreybutler/nvm-windows/releases第二步:创建俩个文件目录,解压安装包到NVM目录中:D:\NVMD:\Node第三步:进入NVM目录双击 install.cmd 直接回车第四步:修改setting.txt文件复制到D:\NVM目录中root: D:\NVMpath: D:\No">
+    
+        <link rel="alternate" type="application/atom+xml" title="爱编程,爱挑战,爱学习" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">TWei</h5>
+          <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">NVM,Node,NPM,CNPM安装</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">NVM,Node,NPM,CNPM安装</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-10T05:36:11.000Z" itemprop="datePublished" class="page-time">
+  2019-10-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-NVM-Node-NPM-CNPM安装"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">NVM,Node,NPM,CNPM安装</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-10 13:36:11" datetime="2019-10-10T05:36:11.000Z"  itemprop="datePublished">2019-10-10</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>NVM-windows安装<br>第一步:下载NVM安装包:<br><a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">https://github.com/coreybutler/nvm-windows/releases</a><br>第二步:创建俩个文件目录,解压安装包到NVM目录中:<br>D:\NVM<br>D:\Node<br>第三步:进入NVM目录双击 install.cmd 直接回车<br>第四步:修改setting.txt文件复制到D:\NVM目录中<br>root: D:\NVM<br>path: D:\Node<br>arch: 64<br>proxy: none<br>node_mirror: <a href="http://npm.taobao.org/mirrors/node/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/node/</a><br>npm_mirror: <a href="https://npm.taobao.org/mirrors/npm/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/npm/</a></p>
+<a id="more"></a>
+<p>第五步:配置环境变量NVM_HOME和NVM_SYMLINK<br>NVM_HOME : D:\NVM<br>NVM_SYMLINK : D:\Node<br>第六步:path中添加变量<br>%NVM_HOME%<br>%NVM_SYMLINK%<br>第七步:查看NVM版本信息<br>nvm -v<br>Node-windows安装<br>第一步:安装Node(为了后续安装全局npm准备)<br>nvm install 6.15.0<br>第二步:使用Node<br>nvm use 6.15.0<br>第三步:在nvm\node_dir下创建node_cache和node_global文件加<br>第四步配置缓冲路径和全局路径(使C:\Users\yi081.npmrc 】文件重新生成)<br>npm config set prefix “D:\NVM\node_dir\node_global”<br>npm config set cache “D:\NVM\node_dir\node_cache”<br>第五步:配置Node环境变量NODE_HOME和NODE_PATH<br>NODE_HOME:D:\Node\node_modules<br>NODE_GLOBAL:D:\NVM\node_dir\node_global (可不配置)<br>NODE_PATH : D:\NVM\node_dir\node_global\node_modules<br>第六步:添加到path中<br>%NODE_HOME%<br>%NODE_GLOBAL% (可不配置)<br>%NODE_PATH%<br>全局安装NPM<br>第一步:下载npm<br>npm install npm@latest -g<br>第二步:配置NPM环境变量<br>NPM_HOME : D:\NVM\node_dir\node_global\npm<br>第三步:添加到path中<br>%NPM_HOME%<br>全局安装CNPM<br>第一步:下载cnpm<br>npm install -g cnpm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a><br>第二步:配置CNPM环境变量(可不配置)<br>CNPM_HOME : D:\NVM\node_dir\node_global\cnpm<br>第三步:添加到path中(可不配置)<br>%NPM_HOME%</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最終更新：<time datetime="2019-10-10T07:24:28.197Z" itemprop="dateUpdated">2019-10-10 15:24:28</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/10/10/NVM-Node-NPM-CNPM安装/" target="_blank" rel="external">http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="TWei">
+            TWei
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&title=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&title=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&source=NVM-windows安装第一步:下载NVM安装包:https://github.com/coreybutler/nvm-windows/releases..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>TWei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&title=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&title=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&source=NVM-windows安装第一步:下载NVM安装包:https://github.com/coreybutler/nvm-windows/releases..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《NVM,Node,NPM,CNPM安装》 — 爱编程,爱挑战,爱学习&url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/10/NVM-Node-NPM-CNPM安装/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQY7jMAwEwPz/09kHDOw0SWeBUKWTkfFYLh8aoqjXKx7vP+Pqnqv7//71fpbXNwYGBsbPMt6342qC5JfqXPfP/PApMTAwDmAkAXofjlf35E9L7rz8HQMDAyMmPRXKGBgYGPPA7RW3z5a7GBgYpzHyx91fJwVnL7Ifq8UxMDB+kJHvuv//66/0NzAwMH6K8S6OpDRNwjqP1OitMDAwVjPygPvGgYlCgZrMgoGBsZQxKS97AZqUrMlHwcDAOIdRDcFeRM6XjEmDAQMDYytjHqb5IrL6CQr/hYGBcQAjX4pNjo71jl9EM2JgYBzMmAdr72BEdYGIgYGxm9ErRPPo7G309+IeAwPjBEYSefMGwLzBUIhyDAyMFYxq96C6UEuWlXkZHB0Iw8DAWMfII3VevubXzaUhBgbGUkYv7PI2QO+jJI0HDAyMMxnVjbDqUrIXps3DFhgYGOsYScPyqTbnvJ0Qla8YGBiLGL3FXPPRQaug2mzAwMA4h9HbLOu9RLXBUGg8YGBgHMCoHnG4X8zlwV0oVnvLQQwMjNWMSdsyCcr80EZU6GJgYCxlzMvIXmMy/2RRiGNgYKxm5CNvA1RfOj9gkTcPMDAw9jHykO0VqNV2Qn68o9BzwMDAWMHIg++pkrVaxH64EwMDAyNoA/Qak9WwxsDAwJgXk/n01bL2wzYfBgbGAYxeMyBfFDa38vPNOwwMjNWMSek4h/XmGvU3MDAwfonxD5stdHKNvz5VAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
