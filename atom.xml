@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-10T12:32:30.867Z</updated>
+  <updated>2019-10-10T14:45:51.931Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Vue深入响应式原理</title>
+    <link href="http://yoursite.com/2019/10/10/ObjectDefineProperty/"/>
+    <id>http://yoursite.com/2019/10/10/ObjectDefineProperty/</id>
+    <published>2019-10-10T12:42:57.000Z</published>
+    <updated>2019-10-10T14:45:51.931Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="Object-defineProperty-obj-prop-descriptor"><a href="#Object-defineProperty-obj-prop-descriptor" class="headerlink" title="Object.defineProperty(obj,prop,descriptor)"></a>Object.defineProperty(obj,prop,descriptor)</h3><p><strong>1.参数</strong></p><ul><li>obj<br>  要在其上定义属性的对象。</li><li>prop<br>  要定义或修改的属性的名称。</li><li>descriptor<br>  将被定义或修改的属性描述符。<a id="more"></a></li></ul><p><strong>2.返回值</strong></p><ul><li>被传递给函数的对象obj</li></ul><p><strong>3.属性描述符</strong></p><ul><li>configurable //抗飞个弱儿包 可删除</li><li>enumerable //硬牛么儿包 可枚举</li><li>writable //ruai特儿包 可赋值</li><li>value</li><li>get //访问</li><li>set //修改</li></ul><p><strong>注意:</strong></p><ul><li>value和writable与get和set不能共存</li><li>obj.prop 调用get方法</li><li>obj.prop = ‘xxx’ 调用set方法</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;Object-defineProperty-obj-prop-descriptor&quot;&gt;&lt;a href=&quot;#Object-defineProperty-obj-prop-descriptor&quot; class=&quot;headerlink&quot; title=&quot;Object.defineProperty(obj,prop,descriptor)&quot;&gt;&lt;/a&gt;Object.defineProperty(obj,prop,descriptor)&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;1.参数&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;obj&lt;br&gt;  要在其上定义属性的对象。&lt;/li&gt;
+&lt;li&gt;prop&lt;br&gt;  要定义或修改的属性的名称。&lt;/li&gt;
+&lt;li&gt;descriptor&lt;br&gt;  将被定义或修改的属性描述符。
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>NVM_Node_NPM_CNPM安装</title>
