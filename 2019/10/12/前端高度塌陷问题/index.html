@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>前端高度塌陷问题 | 爱编程-爱挑战-爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+<meta name="keywords" content="C++ Java Php HTML Linux JavaScript Vue Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端高度塌陷问题">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/前端高度塌陷问题/index.html">
+<meta property="og:site_name" content="爱编程-爱挑战-爱学习">
+<meta property="og:description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-12T07:23:45.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端高度塌陷问题">
+<meta name="twitter:description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+    
+        <link rel="alternate" type="application/atom+xml" title="爱编程-爱挑战-爱学习" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">TWei</h5>
+          <a href="mailto:twitonline@aliyun.com" title="twitonline@aliyun.com" class="mail">twitonline@aliyun.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                所有文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端高度塌陷问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端高度塌陷问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-12T07:22:43.000Z" itemprop="datePublished" class="page-time">
+  2019-10-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-前端高度塌陷问题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端高度塌陷问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-12 15:22:43" datetime="2019-10-12T07:22:43.000Z"  itemprop="datePublished">2019-10-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p> *<br> *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。</p>
+<ul>
+<li>-但是当为子元素设置浮动以后，子元素会完全脱离文档流，</li>
+<li>-此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。</li>
+<li>-由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。</li>
+<li>二.所以在开发中一定要避免出现高度塌陷的问题,<a id="more"></a></li>
+<li>1.我们可以将父元素的高度写死，以避免塌陷的问题出现，</li>
+<li>-但是一旦高度写死，父元素的高度将不能自动适应子元素的高度，所以这种方案是不推荐使用的。</li>
+<li>2.根据W3C的标准，在页面中元素都一个隐含的属性叫做Block Formatting Context</li>
+<li>-简称BFC，该属性可以设置打开或者关闭，默认是关闭的。</li>
+<li>(1)当开启元素的BFC以后，元素将会具有如下的特性：</li>
+<li>1.父元素的垂直外边距不会和子元素重叠</li>
+<li>2.开启BFC的元素不会被浮动元素所覆盖</li>
+<li>3.开启BFC的元素可以包含浮动的子元素</li>
+<li></li>
+<li>(2)如何开启元素的BFC</li>
+<li>1.设置元素浮动</li>
+<li><ul>
+<li>使用这种方式开启，虽然可以撑开父元素，但是会导致父元素的宽度丢失</li>
+</ul>
+</li>
+<li>而且使用这种方式也会导致下边的元素上移，不能解决问题</li>
+<li>2.设置元素绝对定位</li>
+<li>3.设置元素为inline-block</li>
+<li><ul>
+<li>可以解决问题，但是会导致宽度丢失，不推荐使用这种方式</li>
+</ul>
+</li>
+<li>4.将元素的overflow设置为一个非visible的值</li>
+<li>推荐方式：将overflow设置为hidden是副作用最小的开启BFC的方式</li>
+<li>-但是在IE6及以下的浏览器中并不支持BFC，所以使用这种方式不能兼容IE6。</li>
+<li>在IE6中虽然没有BFC，但是具有另一个隐含的属性叫做hasLayout，</li>
+<li>属性的作用和BFC类似，所在IE6浏览器可以通过开hasLayout来解决该问题</li>
+<li>开启方式很多，我们直接使用一种副作用最小的：</li>
+<li>-直接将元素的zoom设置为1即可</li>
+<li>zoom表示放大的意思，后边跟着一个数值，写几就将元素放大几倍</li>
+<li>zoom:1表示不放大元素，但是通过该样式可以开启hasLayout</li>
+<li>zoom这个样式，只在IE中支持，其他浏览器都不支持</li>
+<li>zoom:1;</li>
+<li>overflow: hidden;</li>
+<li>3.可以直接在高度塌陷的父元素的最后，添加一个空白的div，</li>
+<li>由于这个div并没有浮动，所以他是可以撑开父元素的高度的，</li>
+<li>然后在对其进行清除浮动，这样可以通过这个空白的div来撑开父元素的高度，</li>
+<li>基本没有副作用</li>
+<li>使用这种方式虽然可以解决问题，但是会在页面中添加多余的结构。</li>
+<li>.clear{</li>
+<li>clear: both;</li>
+<li>}</li>
+<li>4.通过after伪类，选中box1的后边</li>
+<li>可以通过after伪类向元素的最后添加一个空白的块元素，然后对其清除浮动，</li>
+<li>这样做和添加一个div的原理一样，可以达到一个相同的效果，</li>
+<li>而且不会在页面中添加多余的div，这是我们最推荐使用的方式，几乎没有副作用</li>
+<li>.clearfix:after{</li>
+<li>//添加一个内容</li>
+<li>content: “”;</li>
+<li>//转换为一个块元素</li>
+<li>display: block;</li>
+<li>//清除两侧的浮动</li>
+<li>clear: both;</li>
+<li>}</li>
+<li>在IE6中不支持after伪类,所以在IE6中还需要使用hasLayout来处理</li>
+<li>.clearfix{</li>
+<li>zoom:1;</li>
+<li>}</li>
+<li>.clearfix:after{</li>
+<li>content: “”;</li>
+<li>display: block;</li>
+<li>clear: both;</li>
+<li>}</li>
+<li>.clearfix{</li>
+<li>zoom:1;</li>
+<li>}</li>
+<li>5.子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素</li>
+<li>使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠</li>
+<li>-解决父子元素的外边距重叠</li>
+<li>.box1:before{</li>
+<li>content: “”;</li>
+<li>display:table可以将一个元素设置为表格显示</li>
+<li>}</li>
+<li>-解决父元素高度塌陷</li>
+<li>.clearfix:after{</li>
+<li>content: “”;</li>
+<li>display: block;</li>
+<li>clear: both;</li>
+<li>}</li>
+<li>经过修改后的clearfix是一个多功能的</li>
+<li>既可以解决高度塌陷，又可以确保父元素和子元素的垂直外边距不会重叠</li>
+<li>.clearfix:before,</li>
+<li>.clearfix:after{</li>
+<li>content: “”;</li>
+<li>display: table;</li>
+<li>clear: both;</li>
+<li>}</li>
+<li>.clearfix{</li>
+<li>zoom: 1;</li>
+<li>}</li>
+<li></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-12T07:23:45.350Z" itemprop="dateUpdated">2019-10-12 15:23:45</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="TWei">
+            TWei
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source= * *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。
+
+-但是当为子元素设置浮动以后，子元素会完全脱离文档流，
+-此..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/12/前端高度塌陷问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/10/Vue深入响应式原理/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Vue深入响应式原理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>TWei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source= * *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。
+
+-但是当为子元素设置浮动以后，子元素会完全脱离文档流，
+-此..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/12/前端高度塌陷问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLUlEQVR42u3aS3KDMBAFwNz/0uQALvB7GpyKRWvlKoNRezHMRz8/8Tpe1uu3Z9e/XvN6/dldNy8MDIyvZRyX65qRPPj6+va5p0/EwMB4ACN5fBIi88/tXW/2jIGBgRFsKEnprgEYGBgYnwi4yRbzxBEDAwPjmpEUkwkpb8a1f8RttTgGBsYXMvKu+99//sh8AwMD46sYR7mSgeVaajhZGBgYezMmBWrePpsE8WI/GBgYD2BMQu3a77ShHAMD45mMtik/H2Qmjba60MXAwNiakReWbbE6STcTdvQUDAyMLRj5AdN5Zz4vffP2XPEewMDA+FrGJMiupX3zQebN7woMDIx/z8iPW+VjyxafDAze7AoDA2NrRv4Ta0OCNtHMA26UIGJgYGzBaANZEv7aQDw/fIaBgbE3Y3Jgok3p1gYMxSEMDAyMTRnJDfMBZHvw6+YzIxgYGFswkhStvXIyqqxDPAYGxgMYa4ex1pr+a4H7TUsOAwNja8Z8fNiG1HZcOjo5goGBsRGjTd3aonfxHy0HpRgYGE9g3DxtKPtg7QvgdL6BgYGxNSMPc2up5KRwrQ9bYGBgbMQ4ypWH3bUB52J5jIGBsTVjEuzWGvptcL9h6xgYGFsw2lJzLQVs08223MXAwHgCIx8lJo9fa8PlgRsDAwMjYbRhdC0ZLZp0GBgYGMFhrzaxa1PMaDyAgYGxNSMpYttjFvPtFgklBgbG1ow2UWsDdN5KawM0BgbGAxi/PHzuzfwOeuYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
