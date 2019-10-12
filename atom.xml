@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-12T07:23:45.350Z</updated>
+  <updated>2019-10-12T15:07:41.871Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>标准网页标签模板及其每个标签的作用</title>
+    <link href="http://yoursite.com/2019/10/12/%E6%A0%87%E5%87%86%E7%BD%91%E9%A1%B5%E6%A0%87%E7%AD%BE%E6%A8%A1%E6%9D%BF%E5%8F%8A%E5%85%B6%E6%AF%8F%E4%B8%AA%E6%A0%87%E7%AD%BE%E7%9A%84%E4%BD%9C%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/</id>
+    <published>2019-10-12T15:06:27.000Z</published>
+    <updated>2019-10-12T15:07:41.871Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><!DOCTYPE html><p> </p><ul><li>声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。  </li><li>通过document.compatMode查看模式：<ul><li>BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。</li><li>CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。<a id="more"></a>     </li></ul></li></ul></li><li><p>html lang=”en/zh-CN”&gt;</p><ul><li>lang=”en” 向搜索引擎表示该页面是html语言，并且语言为英文网站,并提示浏览器是否进行翻译</li><li>lang=”zh-CN” 向搜索引擎表示该页面是html语言，并且语言为中文网站</li></ul></li><li><head></head></li><li><meta charset="UTF-8"><ul><li>声明文档使用的字符编码</li></ul></li><li><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"><ul><li>移动端布局</li></ul></li><li><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><ul><li>告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面或告诉浏览器用chrome内核来渲染</li></ul></li><li><meta name="renderer" content="webkit"><ul><li>指定双核浏览器默认以何种方式渲染页面</li></ul></li><li><title></title><ul><li>标题</li></ul></li><li><meta name="description" content="#[[$description$]]#"><ul><li>描述</li></ul></li><li><meta name="keyword" content="#[[$keyword$]]#"><ul><li>关键字</li></ul></li><li><link rel="stylesheet" type="text/css" href></li><li><style type="text/css"></style></li><li></li><li><body></body></li><li><script type="text/javascript" src></script></li><li><script type="text/javascript"></script></li><li></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;!DOCTYPE html&gt;&lt;p&gt; &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。  &lt;/li&gt;
+&lt;li&gt;通过document.compatMode查看模式：&lt;ul&gt;
+&lt;li&gt;BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。&lt;/li&gt;
+&lt;li&gt;CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>前端高度塌陷问题</title>
