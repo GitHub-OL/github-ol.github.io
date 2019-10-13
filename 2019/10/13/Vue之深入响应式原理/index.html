@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="爱编程-爱挑战-爱学习">
 <meta property="og:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何实现数据劫持? 如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?) 如何实现数据编译? 如何实现发布订阅模式? 如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?) 如何实现双向数据绑定? 如何实现依赖缓存? template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-13T02:41:45.402Z">
+<meta property="og:updated_time" content="2019-10-13T02:46:10.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue之深入响应式原理">
 <meta name="twitter:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何实现数据劫持? 如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?) 如何实现数据编译? 如何实现发布订阅模式? 如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?) 如何实现双向数据绑定? 如何实现依赖缓存? template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁">
@@ -133,7 +133,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -205,10 +205,11 @@
 <li>如何实现双向数据绑定?</li>
 <li>如何实现依赖缓存?</li>
 <li>template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁<a id="more"></a>
-<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; a.a &#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; b &#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">const vm = new Mvvm(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      a: &#123;</span><br><span class="line">        a: &apos;我是a&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      b: &apos;我是b&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; a.a &#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; b &#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">const vm = new Mvvm(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      a: &#123;</span><br><span class="line">        a: &apos;我是a&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      b: &apos;我是b&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
 <h3 id="问题-如何实现数据劫持"><a href="#问题-如何实现数据劫持" class="headerlink" title="问题:如何实现数据劫持"></a>问题:如何实现数据劫持</h3><p>答:通过Object.defineProperty()方法,对data中的属性,在访问或者修改对象的其中某个属性时,通过一段代码拦截这个行为,进行额外的操作或者修改返回结果</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// TODO:1.定义Mvvm类</span><br><span class="line">function Mvvm(options=&#123;&#125;)&#123;</span><br><span class="line">    // TODO:this代表的是fade实例对象</span><br><span class="line">    // TODO:将所有属性挂载到$options</span><br><span class="line">    this.$options = options</span><br><span class="line">    var data = this._data = this.options.data</span><br><span class="line">    // TODO:调用数据劫持</span><br><span class="line">    observe(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// TODO:3.观察者</span><br><span class="line">function Observe(obj)&#123;</span><br><span class="line">  for (let key in obj) &#123;</span><br><span class="line">    let val = obj[key]</span><br><span class="line">    // TODO:深度劫持</span><br><span class="line">    observe(val)</span><br><span class="line">    </span><br><span class="line">    Object.defineProperty(obj,key,&#123;</span><br><span class="line">      enumerable : true,</span><br><span class="line">      get()&#123;</span><br><span class="line">        return val</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal)&#123;</span><br><span class="line">        if (newVal === val) return</span><br><span class="line">        val = newVal</span><br><span class="line">        // TODO:深度劫持</span><br><span class="line">        observe(newVal)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// TODO:2.数据劫持-使每个对象都具有get和set方法</span><br><span class="line">function observe(vmData)&#123;</span><br><span class="line">  if (typeof data !== &apos;object&apos;) return</span><br><span class="line">  return new Observe(vmData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -253,7 +254,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-10-13T02:41:45.402Z" itemprop="dateUpdated">2019-10-13 10:41:45</time>
+    最終更新：<time datetime="2019-10-13T02:46:10.014Z" itemprop="dateUpdated">2019-10-13 10:46:10</time>
 </span><br>
 
 
@@ -417,7 +418,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
         </p>
     </div>
     <div class="bottom">
