@@ -21,18 +21,18 @@
     
     
     <meta name="keywords" content>
-    <meta name="description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+    <meta name="description" content="一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。">
 <meta name="keywords" content="C++ Java Php HTML Linux JavaScript Vue Node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端高度塌陷问题">
 <meta property="og:url" content="http://yoursite.com/2019/10/12/前端高度塌陷问题/index.html">
 <meta property="og:site_name" content="爱编程-爱挑战-爱学习">
-<meta property="og:description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+<meta property="og:description" content="一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-12T07:23:45.350Z">
+<meta property="og:updated_time" content="2019-10-13T02:36:48.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端高度塌陷问题">
-<meta name="twitter:description" content="* *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。  -但是当为子元素设置浮动以后，子元素会完全脱离文档流， -此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。 -由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。 二.所以在开发中一定要避免出现高度塌陷的问题,">
+<meta name="twitter:description" content="一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。">
     
         <link rel="alternate" type="application/atom+xml" title="爱编程-爱挑战-爱学习" href="/atom.xml">
     
@@ -133,7 +133,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -169,6 +169,13 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-产生原因"><span class="post-toc-number">1.</span> <span class="post-toc-text">一.产生原因</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-所以在开发中一定要避免出现高度塌陷的问题"><span class="post-toc-number">2.</span> <span class="post-toc-text">二.所以在开发中一定要避免出现高度塌陷的问题,</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-我们可以将父元素的高度写死，以避免塌陷的问题出现，"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.我们可以将父元素的高度写死，以避免塌陷的问题出现，</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-根据W3C的标准，在页面中元素都一个隐含的属性叫做Block-Formatting-Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.根据W3C的标准，在页面中元素都一个隐含的属性叫做Block Formatting Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-通过在高度塌陷的父元素的最后，添加一个空白的div-然后在对其进行清除浮动-但会在页面中添加多余结构"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3.通过在高度塌陷的父元素的最后，添加一个空白的div,然后在对其进行清除浮动,但会在页面中添加多余结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-通过after伪类在高度塌陷的父元素的最后-添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4.通过after伪类在高度塌陷的父元素的最后,添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素-使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">5.子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素,使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
 
 <article id="post-前端高度塌陷问题"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -189,103 +196,73 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p> *<br> *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。</p>
+            <h3 id="一-产生原因"><a href="#一-产生原因" class="headerlink" title="一.产生原因"></a>一.产生原因</h3><p>  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。</p>
+<a id="more"></a>
+<h3 id="二-所以在开发中一定要避免出现高度塌陷的问题"><a href="#二-所以在开发中一定要避免出现高度塌陷的问题" class="headerlink" title="二.所以在开发中一定要避免出现高度塌陷的问题,"></a>二.所以在开发中一定要避免出现高度塌陷的问题,</h3><ul>
+<li><h4 id="1-我们可以将父元素的高度写死，以避免塌陷的问题出现，"><a href="#1-我们可以将父元素的高度写死，以避免塌陷的问题出现，" class="headerlink" title="1.我们可以将父元素的高度写死，以避免塌陷的问题出现，"></a>1.我们可以将父元素的高度写死，以避免塌陷的问题出现，</h4><ul>
+<li>但是一旦高度写死，父元素的高度将不能自动适应子元素的高度，所以这种方案是不推荐使用的。</li>
+</ul>
+</li>
+<li><h4 id="2-根据W3C的标准，在页面中元素都一个隐含的属性叫做Block-Formatting-Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。"><a href="#2-根据W3C的标准，在页面中元素都一个隐含的属性叫做Block-Formatting-Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。" class="headerlink" title="2.根据W3C的标准，在页面中元素都一个隐含的属性叫做Block Formatting Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。"></a>2.根据W3C的标准，在页面中元素都一个隐含的属性叫做Block Formatting Context简称BFC，该属性可以设置打开或者关闭，默认是关闭的。</h4><ul>
+<li><p>(1)当开启元素的BFC以后，元素将会具有如下的特性：</p>
 <ul>
-<li>-但是当为子元素设置浮动以后，子元素会完全脱离文档流，</li>
-<li>-此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。</li>
-<li>-由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。</li>
-<li>二.所以在开发中一定要避免出现高度塌陷的问题,<a id="more"></a></li>
-<li>1.我们可以将父元素的高度写死，以避免塌陷的问题出现，</li>
-<li>-但是一旦高度写死，父元素的高度将不能自动适应子元素的高度，所以这种方案是不推荐使用的。</li>
-<li>2.根据W3C的标准，在页面中元素都一个隐含的属性叫做Block Formatting Context</li>
-<li>-简称BFC，该属性可以设置打开或者关闭，默认是关闭的。</li>
-<li>(1)当开启元素的BFC以后，元素将会具有如下的特性：</li>
-<li>1.父元素的垂直外边距不会和子元素重叠</li>
-<li>2.开启BFC的元素不会被浮动元素所覆盖</li>
-<li>3.开启BFC的元素可以包含浮动的子元素</li>
-<li></li>
-<li>(2)如何开启元素的BFC</li>
-<li>1.设置元素浮动</li>
-<li><ul>
-<li>使用这种方式开启，虽然可以撑开父元素，但是会导致父元素的宽度丢失</li>
+<li><strong>父元素的垂直外边距不会和子元素重叠</strong></li>
+<li><strong>开启BFC的元素不会被浮动元素所覆盖</strong></li>
+<li><strong>开启BFC的元素可以包含浮动的子元素</strong></li>
 </ul>
 </li>
-<li>而且使用这种方式也会导致下边的元素上移，不能解决问题</li>
-<li>2.设置元素绝对定位</li>
-<li>3.设置元素为inline-block</li>
-<li><ul>
-<li>可以解决问题，但是会导致宽度丢失，不推荐使用这种方式</li>
+<li><p>(2)如何开启元素的BFC</p>
+<ul>
+<li><p><strong>设置元素浮动</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用这种方式开启，虽然可以撑开父元素，但是会导致父元素的宽度丢失而且使用这种方式也会导致下边的元素上移，不能解决问题</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>设置元素绝对定位</strong></p>
+</li>
+<li><p><strong>设置元素为inline-block</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">可以解决问题，但是会导致宽度丢失，不推荐使用这种方式</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>将元素的overflow设置为一个非visible的值</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">推荐方式：将overflow设置为hidden是副作用最小的开启BFC的方式,</span><br><span class="line">但是在IE6及以下的浏览器中并不支持BFC，所以使用这种方式不能兼容IE6。在IE6中虽然没有BFC，但是具有另一个隐含的属性叫做hasLayout，属性的作用和BFC类似，所在IE6浏览器可以通过开hasLayout来解决该问题开启方式很多，我们直接使用一种副作用最小的：</span><br><span class="line">   直接将元素的zoom设置为1即可</span><br><span class="line">   zoom表示放大的意思，后边跟着一个数值，写几就将元素放大几倍</span><br><span class="line">   zoom:1表示不放大元素，但是通过该样式可以开启hasLayout</span><br><span class="line">   zoom这个样式，只在IE中支持，其他浏览器都不支持</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>最终兼容方案</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">    overflow: hidden; </span><br><span class="line">    zoom:1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
 </ul>
 </li>
-<li>4.将元素的overflow设置为一个非visible的值</li>
-<li>推荐方式：将overflow设置为hidden是副作用最小的开启BFC的方式</li>
-<li>-但是在IE6及以下的浏览器中并不支持BFC，所以使用这种方式不能兼容IE6。</li>
-<li>在IE6中虽然没有BFC，但是具有另一个隐含的属性叫做hasLayout，</li>
-<li>属性的作用和BFC类似，所在IE6浏览器可以通过开hasLayout来解决该问题</li>
-<li>开启方式很多，我们直接使用一种副作用最小的：</li>
-<li>-直接将元素的zoom设置为1即可</li>
-<li>zoom表示放大的意思，后边跟着一个数值，写几就将元素放大几倍</li>
-<li>zoom:1表示不放大元素，但是通过该样式可以开启hasLayout</li>
-<li>zoom这个样式，只在IE中支持，其他浏览器都不支持</li>
-<li>zoom:1;</li>
-<li>overflow: hidden;</li>
-<li>3.可以直接在高度塌陷的父元素的最后，添加一个空白的div，</li>
-<li>由于这个div并没有浮动，所以他是可以撑开父元素的高度的，</li>
-<li>然后在对其进行清除浮动，这样可以通过这个空白的div来撑开父元素的高度，</li>
-<li>基本没有副作用</li>
-<li>使用这种方式虽然可以解决问题，但是会在页面中添加多余的结构。</li>
-<li>.clear{</li>
-<li>clear: both;</li>
-<li>}</li>
-<li>4.通过after伪类，选中box1的后边</li>
-<li>可以通过after伪类向元素的最后添加一个空白的块元素，然后对其清除浮动，</li>
-<li>这样做和添加一个div的原理一样，可以达到一个相同的效果，</li>
-<li>而且不会在页面中添加多余的div，这是我们最推荐使用的方式，几乎没有副作用</li>
-<li>.clearfix:after{</li>
-<li>//添加一个内容</li>
-<li>content: “”;</li>
-<li>//转换为一个块元素</li>
-<li>display: block;</li>
-<li>//清除两侧的浮动</li>
-<li>clear: both;</li>
-<li>}</li>
-<li>在IE6中不支持after伪类,所以在IE6中还需要使用hasLayout来处理</li>
-<li>.clearfix{</li>
-<li>zoom:1;</li>
-<li>}</li>
-<li>.clearfix:after{</li>
-<li>content: “”;</li>
-<li>display: block;</li>
-<li>clear: both;</li>
-<li>}</li>
-<li>.clearfix{</li>
-<li>zoom:1;</li>
-<li>}</li>
-<li>5.子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素</li>
-<li>使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠</li>
-<li>-解决父子元素的外边距重叠</li>
-<li>.box1:before{</li>
-<li>content: “”;</li>
-<li>display:table可以将一个元素设置为表格显示</li>
-<li>}</li>
-<li>-解决父元素高度塌陷</li>
-<li>.clearfix:after{</li>
-<li>content: “”;</li>
-<li>display: block;</li>
-<li>clear: both;</li>
-<li>}</li>
-<li>经过修改后的clearfix是一个多功能的</li>
-<li>既可以解决高度塌陷，又可以确保父元素和子元素的垂直外边距不会重叠</li>
-<li>.clearfix:before,</li>
-<li>.clearfix:after{</li>
-<li>content: “”;</li>
-<li>display: table;</li>
-<li>clear: both;</li>
-<li>}</li>
-<li>.clearfix{</li>
-<li>zoom: 1;</li>
-<li>}</li>
-<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h4 id="3-通过在高度塌陷的父元素的最后，添加一个空白的div-然后在对其进行清除浮动-但会在页面中添加多余结构"><a href="#3-通过在高度塌陷的父元素的最后，添加一个空白的div-然后在对其进行清除浮动-但会在页面中添加多余结构" class="headerlink" title="3.通过在高度塌陷的父元素的最后，添加一个空白的div,然后在对其进行清除浮动,但会在页面中添加多余结构"></a>3.通过在高度塌陷的父元素的最后，添加一个空白的div,然后在对其进行清除浮动,但会在页面中添加多余结构</h4><ul>
+<li>由于这个div并没有浮动，所以他是可以撑开父元素的高度的，然后在对其进行清除浮动，这样可以通过这个空白的div来撑开父元素的高度，基本没有副作用,使用这种方式虽然可以解决问题，但是会在页面中添加多余的结构。</li>
+<li><strong>最终方案</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h4 id="4-通过after伪类在高度塌陷的父元素的最后-添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构"><a href="#4-通过after伪类在高度塌陷的父元素的最后-添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构" class="headerlink" title="4.通过after伪类在高度塌陷的父元素的最后,添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构"></a>4.通过after伪类在高度塌陷的父元素的最后,添加一个空白的块元素，然后对其清除浮动，不会再页面中添加多余结构</h4><ul>
+<li><p>这样做和添加一个div的原理一样，可以达到一个相同的效果，而且不会在页面中添加多余的div，这是我们最推荐使用的方式，几乎没有副作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  .clearfix:after&#123;</span><br><span class="line">      // 添加一个内容</span><br><span class="line">      content: &quot;&quot;;</span><br><span class="line">      // 转换为一个块元素</span><br><span class="line">      display: block;</span><br><span class="line">      // 清除两侧的浮动</span><br><span class="line">      clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>在IE6中不支持after伪类,所以在IE6中还需要使用hasLayout来处理</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">    zoom:1;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix:after&#123;</span><br><span class="line">    content: &quot;&quot;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="5-子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素-使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠"><a href="#5-子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素-使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠" class="headerlink" title="5.子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素,使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠"></a>5.子元素和父元素相邻的垂直外边距会发生重叠，子元素的外边距会传递给父元素,使用空的table标签可以隔离父子元素的外边距，阻止外边距的重叠</h4><ul>
+<li><p><strong>解决父子元素的外边距重叠</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box1:before&#123;</span><br><span class="line">    content: &quot;&quot;;</span><br><span class="line">    display:table可以将一个元素设置为表格显示</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>解决父元素高度塌陷</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">    zoom:1;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix:after&#123;</span><br><span class="line">    content: &quot;&quot;;</span><br><span class="line">    display: block;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>经过修改后的clearfix是一个多功能的既可以解决高度塌陷，又可以确保父元素和子元素的垂直外边距不会重叠</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.clearfix&#123;</span><br><span class="line">    zoom: 1;</span><br><span class="line">&#125;</span><br><span class="line">.clearfix:before,</span><br><span class="line">.clearfix:after&#123;</span><br><span class="line">    content: &quot;&quot;;</span><br><span class="line">    display: table;</span><br><span class="line">    clear: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -295,7 +272,7 @@
     <div class="content">
         
 <span class="post-time">
-    最終更新：<time datetime="2019-10-12T07:23:45.350Z" itemprop="dateUpdated">2019-10-12 15:23:45</time>
+    Last updated: <time datetime="2019-10-13T02:36:48.264Z" itemprop="dateUpdated">2019-10-13 10:36:48</time>
 </span><br>
 
 
@@ -337,10 +314,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source= * *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。
-
--但是当为子元素设置浮动以后，子元素会完全脱离文档流，
--此..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source=一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
@@ -387,9 +361,9 @@
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/10/10/Vue深入响应式原理/" id="post-next" class="post-nav-link">
+      <a href="/2019/10/10/了解Object-defineProperty-方法/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Vue深入响应式原理</h4>
+        <h4 class="title">了解Object.defineProperty()方法</h4>
       </a>
     </div>
   
@@ -467,7 +441,7 @@
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">
@@ -499,10 +473,7 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source= * *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。
-
--但是当为子元素设置浮动以后，子元素会完全脱离文档流，
--此..." data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/前端高度塌陷问题/&title=《前端高度塌陷问题》 — 爱编程-爱挑战-爱学习&source=一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>

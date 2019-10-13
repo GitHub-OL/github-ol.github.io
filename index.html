@@ -132,7 +132,7 @@
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
                 <i class="icon icon-lg icon-chevron-left"></i>
             </a>
-            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="検索">
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
                 <i class="icon icon-lg icon-search"></i>
             </a>
@@ -166,6 +166,53 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-Vue之深入响应式原理"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2019-10-13 10:41:02" datetime="2019-10-13T02:41:02.000Z"  itemprop="datePublished">2019-10-13</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2019/10/13/Vue之深入响应式原理/">Vue之深入响应式原理</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        理解Vue响应式原理,只需通过解决以下几个问题即可
+如何实现数据劫持?
+如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?)
+如何实现数据编译?
+如何实现发布订阅模式?
+如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?)
+如何实现双向数据绑定?
+如何实现依赖缓存?
+template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁
+    
+
+        <a href="/2019/10/13/Vue之深入响应式原理/" class="post-more waves-effect waves-button">
+            Continue reading...
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-标准网页标签模板及其每个标签的作用"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -192,17 +239,11 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        
- 
-
-声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。  
-通过document.compatMode查看模式：
-BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。
-CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。
+        12345678910111213141516171819202122232425262728293031&lt;!DOCTYPE html&gt;     + 声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。      + 通过document.compatMode查看模式：        + BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。        + CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。        &lt;html lang=&quot;en/zh-CN&quot;&gt;    + lang=&quot;en&quot; 向搜索引擎表示该页面是html语言，并且语言为英文网站,并提示浏览器是否进行翻译    + lang=&quot;zh-CN&quot; 向搜索引擎表示该页面是html语言，并且语言为中文网站&lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;/&gt;    + 声明文档使用的字符编码&lt;meta name=&quot;viewport&quot;content=&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no&quot;&gt;    + 移动端布局&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;/&gt;    + 告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面或告诉浏览器用chrome内核来渲染&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;/&gt;    + 指定双核浏览器默认以何种方式渲染页面&lt;title&gt;&lt;/title&gt;    + 标题&lt;meta name=&quot;description&quot; content=&quot;#[[$description$]]#&quot;/&gt;    + 描述&lt;meta name=&quot;keyword&quot; content=&quot;#[[$keyword$]]#&quot;/&gt;    + 关键字&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&quot;&gt;&lt;style type=&quot;text/css&quot;&gt;&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;&lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&lt;/body&gt;
     
 
         <a href="/2019/10/12/标准网页标签模板及其每个标签的作用/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -237,61 +278,11 @@ CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-         * *一.在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。
-
--但是当为子元素设置浮动以后，子元素会完全脱离文档流，
--此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。
--由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。
-二.所以在开发中一定要避免出现高度塌陷的问题,
+        一.产生原因  在文档流中，父元素的高度默认是被子元素撑开的，也就是子元素多高，父元素就多高。但是当为子元素设置浮动以后，子元素会完全脱离文档流，此时将会导致子元素无法撑起父元素的高度，导致父元素的高度塌陷。由于父元素的高度塌陷了，则父元素下的所有元素都会向上移动，这样将会导致页面布局混乱。
     
 
         <a href="/2019/10/12/前端高度塌陷问题/" class="post-more waves-effect waves-button">
-            続きを読む…
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-Vue深入响应式原理"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2019-10-10 23:46:17" datetime="2019-10-10T15:46:17.000Z"  itemprop="datePublished">2019-10-10</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2019/10/10/Vue深入响应式原理/">Vue深入响应式原理</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        理解Vue响应式原理,只需通过解决以下几个问题即可
-如何对this.xxx的访问代理到this.data.xxx上?
-如何实现数据劫持,监听数据的读写操作?
-如何实现依赖缓存?
-template改变的时候,如何清理依赖想集合?eg:v-if和组件销毁
-如何实现数据修改DOM更新
-
-    
-
-        <a href="/2019/10/10/Vue深入响应式原理/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -338,7 +329,7 @@ descriptor  将被定义或修改的属性描述符。
     
 
         <a href="/2019/10/10/了解Object-defineProperty-方法/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -377,7 +368,7 @@ descriptor  将被定义或修改的属性描述符。
     
 
         <a href="/2019/10/10/NVM-Node-NPM-CNPM安装/" class="post-more waves-effect waves-button">
-            続きを読む…
+            Continue reading...
         </a>
     </div>
     
@@ -408,7 +399,7 @@ descriptor  将被定义或修改的属性描述符。
             
                 <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
             
-            <span>このブログの内容物は<a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ja">クリエイティブ・コモンズ 表示 - 非営利 - 継承 4.0 国際ライセンスの下に提供されています</a></span>
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
         </p>
     </div>
     <div class="bottom">

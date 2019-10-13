@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Vue之深入响应式原理 | 爱编程-爱挑战-爱学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content>
+    <meta name="description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何实现数据劫持? 如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?) 如何实现数据编译? 如何实现发布订阅模式? 如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?) 如何实现双向数据绑定? 如何实现依赖缓存? template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁">
+<meta name="keywords" content="C++ Java Php HTML Linux JavaScript Vue Node">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue之深入响应式原理">
+<meta property="og:url" content="http://yoursite.com/2019/10/13/Vue之深入响应式原理/index.html">
+<meta property="og:site_name" content="爱编程-爱挑战-爱学习">
+<meta property="og:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何实现数据劫持? 如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?) 如何实现数据编译? 如何实现发布订阅模式? 如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?) 如何实现双向数据绑定? 如何实现依赖缓存? template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-13T02:41:45.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue之深入响应式原理">
+<meta name="twitter:description" content="理解Vue响应式原理,只需通过解决以下几个问题即可 如何实现数据劫持? 如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?) 如何实现数据编译? 如何实现发布订阅模式? 如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?) 如何实现双向数据绑定? 如何实现依赖缓存? template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁">
+    
+        <link rel="alternate" type="application/atom+xml" title="爱编程-爱挑战-爱学习" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">TWei</h5>
+          <a href="mailto:twitonline@aliyun.com" title="twitonline@aliyun.com" class="mail">twitonline@aliyun.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                所有文章
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/yscoder" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/ysweb" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                微博
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                测试
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Vue之深入响应式原理</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Vue之深入响应式原理</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-10-13T02:41:02.000Z" itemprop="datePublished" class="page-time">
+  2019-10-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解Vue响应式原理-只需通过解决以下几个问题即可"><span class="post-toc-number">1.</span> <span class="post-toc-text">理解Vue响应式原理,只需通过解决以下几个问题即可</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前提"><span class="post-toc-number">2.</span> <span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-如何实现数据劫持"><span class="post-toc-number">3.</span> <span class="post-toc-text">问题:如何实现数据劫持</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-如何实现数据代理-如何对this-xxx的访问代理到this-data-xxx上"><span class="post-toc-number">4.</span> <span class="post-toc-text">问题:如何实现数据代理-如何对this.xxx的访问代理到this.data.xxx上?</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-如何实现数据编译"><span class="post-toc-number">5.</span> <span class="post-toc-text">问题:如何实现数据编译</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-如何实现发布订阅模式"><span class="post-toc-number">6.</span> <span class="post-toc-text">问题:如何实现发布订阅模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-如何更新视图-当数据改变需要重新刷新视图"><span class="post-toc-number">7.</span> <span class="post-toc-text">问题:如何更新视图-当数据改变需要重新刷新视图</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#问题-双向数据绑定"><span class="post-toc-number">8.</span> <span class="post-toc-text">问题:双向数据绑定</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Vue之深入响应式原理"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Vue之深入响应式原理</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-10-13 10:41:02" datetime="2019-10-13T02:41:02.000Z"  itemprop="datePublished">2019-10-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="理解Vue响应式原理-只需通过解决以下几个问题即可"><a href="#理解Vue响应式原理-只需通过解决以下几个问题即可" class="headerlink" title="理解Vue响应式原理,只需通过解决以下几个问题即可"></a>理解Vue响应式原理,只需通过解决以下几个问题即可</h3><ul>
+<li>如何实现数据劫持?</li>
+<li>如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上?)</li>
+<li>如何实现数据编译?</li>
+<li>如何实现发布订阅模式?</li>
+<li>如何实现更新视图?(如何监听数据的读写操作?如何实现数据修改DOM更新?)</li>
+<li>如何实现双向数据绑定?</li>
+<li>如何实现依赖缓存?</li>
+<li>template改变的时候,如何清理依赖项集合?eg:v-if和组件销毁<a id="more"></a>
+<h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;app&quot;&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;p&gt;&#123;&#123; a.a &#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;span&gt;&#123;&#123; b &#125;&#125;&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">const vm = new Mvvm(&#123;</span><br><span class="line">    el: &apos;#app&apos;,</span><br><span class="line">    data: &#123;</span><br><span class="line">      a: &#123;</span><br><span class="line">        a: &apos;我是a&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      b: &apos;我是b&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="问题-如何实现数据劫持"><a href="#问题-如何实现数据劫持" class="headerlink" title="问题:如何实现数据劫持"></a>问题:如何实现数据劫持</h3><p>答:通过Object.defineProperty()方法,对data中的属性,在访问或者修改对象的其中某个属性时,通过一段代码拦截这个行为,进行额外的操作或者修改返回结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// TODO:1.定义Mvvm类</span><br><span class="line">function Mvvm(options=&#123;&#125;)&#123;</span><br><span class="line">    // TODO:this代表的是fade实例对象</span><br><span class="line">    // TODO:将所有属性挂载到$options</span><br><span class="line">    this.$options = options</span><br><span class="line">    var data = this._data = this.options.data</span><br><span class="line">    // TODO:调用数据劫持</span><br><span class="line">    observe(data)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// TODO:3.观察者</span><br><span class="line">function Observe(obj)&#123;</span><br><span class="line">  for (let key in obj) &#123;</span><br><span class="line">    let val = obj[key]</span><br><span class="line">    // TODO:深度劫持</span><br><span class="line">    observe(val)</span><br><span class="line">    </span><br><span class="line">    Object.defineProperty(obj,key,&#123;</span><br><span class="line">      enumerable : true,</span><br><span class="line">      get()&#123;</span><br><span class="line">        return val</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal)&#123;</span><br><span class="line">        if (newVal === val) return</span><br><span class="line">        val = newVal</span><br><span class="line">        // TODO:深度劫持</span><br><span class="line">        observe(newVal)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// TODO:2.数据劫持-使每个对象都具有get和set方法</span><br><span class="line">function observe(vmData)&#123;</span><br><span class="line">  if (typeof data !== &apos;object&apos;) return</span><br><span class="line">  return new Observe(vmData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题-如何实现数据代理-如何对this-xxx的访问代理到this-data-xxx上"><a href="#问题-如何实现数据代理-如何对this-xxx的访问代理到this-data-xxx上" class="headerlink" title="问题:如何实现数据代理-如何对this.xxx的访问代理到this.data.xxx上?"></a>问题:如何实现数据代理-如何对this.xxx的访问代理到this.data.xxx上?</h3><p>答:对于每个data上的属性,都在app上做一个代理,实际操作的是this.data<br>实现的代码如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function Mvvm(options = &#123;&#125;) &#123;</span><br><span class="line">  // TODO:this代表的是zhufeng实例对象</span><br><span class="line">  // TODO:将所有属性挂载到$options</span><br><span class="line">  this.$options = options</span><br><span class="line">  //this._data</span><br><span class="line">  var data = this._data = this.$options.data</span><br><span class="line">  observe(data) </span><br><span class="line">  // TODO:4.数据代理</span><br><span class="line">  for (let key in data) &#123;</span><br><span class="line">    Object.defineProperty(this,key,&#123;</span><br><span class="line">      enumerable : true,</span><br><span class="line">      get()&#123;</span><br><span class="line">        return this._data[key]</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal)&#123;</span><br><span class="line">        this._data[key] = newVal</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题-如何实现数据编译"><a href="#问题-如何实现数据编译" class="headerlink" title="问题:如何实现数据编译"></a>问题:如何实现数据编译</h3><p>答:通过获取vm管理DOM的根节点,让其在内存中完成相关的正则匹配工作,替换DOM中的文本节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// TODO:5数据编译</span><br><span class="line">function Compile(el,vm)&#123;</span><br><span class="line">  vm.$el = document.querySelector(el)</span><br><span class="line">  let fragment = document.createDocumentFragment()</span><br><span class="line">  while (child = vm.$el.firstChild) &#123;</span><br><span class="line">    fragment.appendChild(child)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  replace(fragment)</span><br><span class="line"></span><br><span class="line">  // TODO:6.数据替换</span><br><span class="line">  function replace(frag)&#123;</span><br><span class="line">    Array.from(frag.childNodes).forEach(function (node) &#123;</span><br><span class="line">      let text = node.textContent</span><br><span class="line">      let regExp = /\&#123;\&#123;(.*)\&#125;\&#125;/</span><br><span class="line">      if (node.nodeType === 1 &amp;&amp; regExp.test(text)) &#123;</span><br><span class="line">        let arr = RegExp.$1.trim().split(&apos;.&apos;)</span><br><span class="line">        let val = vm</span><br><span class="line">        arr.forEach(function (k) &#123;</span><br><span class="line">          val = val[k]</span><br><span class="line">        &#125;)</span><br><span class="line">        node.textContent = text.replace(regExp,val).trim()</span><br><span class="line">      &#125;</span><br><span class="line">      if (node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        replace(node)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  vm.$el.appendChild(fragment)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function Mvvm(options = &#123;&#125;) &#123;</span><br><span class="line">  ....</span><br><span class="line">  // TODO:进行编译</span><br><span class="line">  new Compile(optionns.el,this)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题-如何实现发布订阅模式"><a href="#问题-如何实现发布订阅模式" class="headerlink" title="问题:如何实现发布订阅模式"></a>问题:如何实现发布订阅模式</h3><p>答:发布订阅主要靠的就是数组关系，订阅就是放入函数，发布就是让数组里的函数执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// TODO:8.发布订阅模式</span><br><span class="line">// TODO:桥梁</span><br><span class="line">function Dep()&#123; // 桥梁</span><br><span class="line">  this.subs = [] // 订阅事件池</span><br><span class="line">&#125;</span><br><span class="line">// TODO:进行订阅的方法(往里面扔函数)</span><br><span class="line">Dep.property.addSub = function (sub) &#123;  //sub就是watcher</span><br><span class="line">  this.subs.push(sub)</span><br><span class="line">&#125;</span><br><span class="line">// TODO:进行发布/通知的方法(让函数的每一项一次执行)</span><br><span class="line">Dep.prototype.notify = function () &#123;</span><br><span class="line">  this.subs.forEach(sub =&gt; sub.update())//绑定的事件,都有一个update属性</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// TODO:订阅者</span><br><span class="line">function Watcher(fn)&#123; //Watcher是一个类,通过这个类创建的实例都拥有update方法</span><br><span class="line">  this.fn = fn</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Watcher.prototype.update = function () &#123; //调用fn()</span><br><span class="line">  this.fn()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题-如何更新视图-当数据改变需要重新刷新视图"><a href="#问题-如何更新视图-当数据改变需要重新刷新视图" class="headerlink" title="问题:如何更新视图-当数据改变需要重新刷新视图"></a>问题:如何更新视图-当数据改变需要重新刷新视图</h3><p>答:现在我们要订阅一个事件，当数据改变需要重新刷新视图，这就需要在replace替换的逻辑里来处理<br>通过new Watcher把数据订阅一下，数据一变就执行改变内容的操作</p>
+<ul>
+<li><p>监听变化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// TODO:6.数据替换</span><br><span class="line">  function replace(frag) &#123;</span><br><span class="line">    ...</span><br><span class="line">    node.textContent = text.replace(regExp, val).trim()</span><br><span class="line">    </span><br><span class="line">    // TODO:监听变化</span><br><span class="line">    new Watcher(vm,RegExp.$1,function (newVal) &#123;</span><br><span class="line">        node.textContent = text.replace(regExp,newVal).trim()</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    if (node.childNodes &amp;&amp; node.childNodes.length) &#123;</span><br><span class="line">        replace(node)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写Watcher构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// TODO:订阅者</span><br><span class="line">function Watcher(vm,exp,fn)&#123; //Watcher是一个类,通过这个类创建的实例都拥有update方法</span><br><span class="line">  this.fn = fn</span><br><span class="line">  this.vm = vm</span><br><span class="line">  this.exp = exp</span><br><span class="line"></span><br><span class="line">  Dep.target = this</span><br><span class="line">  let arr = exp.trim().split(&apos;.&apos;)</span><br><span class="line">  let val = vm</span><br><span class="line">  arr.forEach(function (key) &#123;</span><br><span class="line">    val = val[key]</span><br><span class="line">  &#125;)</span><br><span class="line">  Dep.target = null //  // 上面获取val[key]的时候会调用get方法, 因此使用完毕之后需要把该属性置为null</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重写数据劫持get和set方法</p>
+<ul>
+<li>解:当获取值的时候就会自动调用get方法，于是我们去找一下数据劫持那里的get方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">// TODO:3.观察者</span><br><span class="line">function Observe(obj)&#123;</span><br><span class="line">  // TODO:创建桥梁</span><br><span class="line">  let dep = new Dep()</span><br><span class="line">  for (let key in obj) &#123;</span><br><span class="line">    let val = obj[key]</span><br><span class="line">    // TODO:深度劫持</span><br><span class="line">    observe(val)</span><br><span class="line"></span><br><span class="line">    Object.defineProperty(obj,key,&#123;</span><br><span class="line">      enumerable : true,</span><br><span class="line">      get()&#123;</span><br><span class="line">        // TODO:将watcher添加到订阅事件中 [watcher]</span><br><span class="line">        Dep.target &amp;&amp; dep.addSub(Dep.target)</span><br><span class="line">        return val</span><br><span class="line">      &#125;,</span><br><span class="line">      set(newVal)&#123; // 更改值得时候</span><br><span class="line">        if (newVal === val) return // 设置的值和以前的是一样的东西</span><br><span class="line">        val = newVal // 如果以后在获取值的时候将刚才设置的值丢回去</span><br><span class="line">        // TODO:深度劫持</span><br><span class="line">        observe(newVal)</span><br><span class="line">        // TODO:执行update方法</span><br><span class="line">        dep.notify()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>修改watcher的update方法</p>
+<ul>
+<li>解:当set修改值的时候执行了dep.notify方法，这个方法是执行watcher的update方法，那么我们再对update进行修改一下<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Watcher.prototype.update = function () &#123; //调用fn()</span><br><span class="line">  this.fn()</span><br><span class="line">  // notify的时候值已经更改了</span><br><span class="line">  // 再通过vm, exp来获取新的值</span><br><span class="line">  let arr = this.exp.trim().split(&apos;.&apos;)</span><br><span class="line">  let val = this.vm</span><br><span class="line">  arr.forEach(function(key)&#123;</span><br><span class="line">    val = val[key]</span><br><span class="line">  &#125;)</span><br><span class="line">  this.fn(val) // 将每次拿到的新值去替换&#123;&#123;&#125;&#125;的内容即可</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="问题-双向数据绑定"><a href="#问题-双向数据绑定" class="headerlink" title="问题:双向数据绑定"></a>问题:双向数据绑定</h3><pre><code></code></pre>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    Last updated: <time datetime="2019-10-13T02:41:45.402Z" itemprop="dateUpdated">2019-10-13 10:41:45</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="TWei">
+            TWei
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&title=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&title=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&source=理解Vue响应式原理,只需通过解决以下几个问题即可
+如何实现数据劫持?
+如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/13/Vue之深入响应式原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/10/12/标准网页标签模板及其每个标签的作用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">标准网页标签模板及其每个标签的作用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>This blog is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>TWei &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&title=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&title=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&source=理解Vue响应式原理,只需通过解决以下几个问题即可
+如何实现数据劫持?
+如何实现数据代理?(如何对this.xxx的访问代理到this.data.xxx上..." data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/13/Vue之深入响应式原理/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Vue之深入响应式原理》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/13/Vue之深入响应式原理/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS27CUAwFUPa/aSp1VIkGru1QFedkhAIInwzM8+d2i6/793V0/+e7j3fy+0efOe3CwMD4WMb96fXIOArl6M7z4JLfjagYGBgXYDxPsnlYvXyYP7LD+xgYGBjBjyWhJIkbAwMD4x0Jt1qC5gdNDAwMjGoRWwWf1R87uRbHwMD4QEZ1MPCXr98438DAwPgQxr11VYedeQJtxoOBgbGa0Wv0V8PKv9trvWFgYOxm5E20+SLXvA13iMTAwFjNyJNgHvqEnSycNf8HMDAwFjHyg2NvRaN3MI1iwMDAWM2oLkBUVzF6yGbjDwMDYx1j0hRL2L2GWn6I/GW+gYGBsZRRbdP3Wv9Ju79XGGNgYOxm9IrYBPnufa0X5SsGBsZSRp4oq+k4Ot4Vx5xRKYuBgbGCUS1We+PGyWMarYVhYGCsY1QXJnop8oT1r3wGi4GBsYJRTaP52HIe+mgTDAMDYxEj/0LvWNlLu+WRKgYGxmpG3tKqNu57j6M3isDAwLgCIwm6utp1bgOu8DwwMDAuw5iPLfNCd558MTAwrsCYtOOrhWv5lDohYWBgrGD0VksnyPk67OEkFgMDYylj3hTLYdU1surQFAMDYzdjUo7mI4TeKljhQWBgYFyA0Ut889bYabU4BgYGRpxwqwfH6rsv5hsYGBiXZySpNh+F9tjlzI2BgbGIUQ2l2tzPxwPNTiEGBsZqxnww0Evlk6HpW+YbGBgY/5HxBa1PaphMDFs0AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
