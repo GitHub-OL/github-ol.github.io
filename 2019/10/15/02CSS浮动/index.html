@@ -14,25 +14,25 @@
     
     
     
-    <title>标准网页标签模板及其每个标签的作用 | 爱编程-爱挑战-爱学习</title>
+    <title>02CSS浮动 | 爱编程-爱挑战-爱学习</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content>
-    <meta name="description" content="123456789101112131415161718192021222324252627282930&amp;lt;!DOCTYPE html&amp;gt;     + 声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。      + 通过document.compatMode查看模式：        + BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。">
+    <meta name="description" content="一.CSS浮动是什么?css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止 1.相关概念 标准文档流:普通流/文档流 脱标:脱离标准流 CSS中一共有三种脱标手段:">
 <meta name="keywords" content="C++ Java Php HTML Linux JavaScript Vue Node">
 <meta property="og:type" content="article">
-<meta property="og:title" content="标准网页标签模板及其每个标签的作用">
-<meta property="og:url" content="http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/index.html">
+<meta property="og:title" content="02CSS浮动">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/02CSS浮动/index.html">
 <meta property="og:site_name" content="爱编程-爱挑战-爱学习">
-<meta property="og:description" content="123456789101112131415161718192021222324252627282930&amp;lt;!DOCTYPE html&amp;gt;     + 声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。      + 通过document.compatMode查看模式：        + BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。">
+<meta property="og:description" content="一.CSS浮动是什么?css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止 1.相关概念 标准文档流:普通流/文档流 脱标:脱离标准流 CSS中一共有三种脱标手段:">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-13T02:45:49.820Z">
+<meta property="og:updated_time" content="2019-10-15T08:49:00.635Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标准网页标签模板及其每个标签的作用">
-<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930&amp;lt;!DOCTYPE html&amp;gt;     + 声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。      + 通过document.compatMode查看模式：        + BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。">
+<meta name="twitter:title" content="02CSS浮动">
+<meta name="twitter:description" content="一.CSS浮动是什么?css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止 1.相关概念 标准文档流:普通流/文档流 脱标:脱离标准流 CSS中一共有三种脱标手段:">
     
         <link rel="alternate" type="application/atom+xml" title="爱编程-爱挑战-爱学习" href="/atom.xml">
     
@@ -127,7 +127,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">标准网页标签模板及其每个标签的作用</div>
+        <div class="flex-col header-title ellipsis">02CSS浮动</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -149,11 +149,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">标准网页标签模板及其每个标签的作用</h1>
+        <h1 class="title">02CSS浮动</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-10-12T15:06:27.000Z" itemprop="datePublished" class="page-time">
-  2019-10-12
+                <time datetime="2019-10-15T08:47:22.000Z" itemprop="datePublished" class="page-time">
+  2019-10-15
 </time>
 
 
@@ -169,14 +169,21 @@
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一-CSS浮动是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">一.CSS浮动是什么?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-相关概念"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.相关概念</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二-浮动"><span class="post-toc-number">2.</span> <span class="post-toc-text">二.浮动</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-浮动API"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.浮动API</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-浮动规则"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.浮动规则</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-浮动特性"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3.浮动特性</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三-清除浮动"><span class="post-toc-number">3.</span> <span class="post-toc-text">三.清除浮动</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-清除浮动API"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1.清除浮动API</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-清除浮动规则"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2.清除浮动规则</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
 
-<article id="post-标准网页标签模板及其每个标签的作用"
+
+<article id="post-02CSS浮动"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">标准网页标签模板及其每个标签的作用</h1>
+        <h1 class="post-card-title">02CSS浮动</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-10-12 23:06:27" datetime="2019-10-12T15:06:27.000Z"  itemprop="datePublished">2019-10-12</time>
+            <time class="post-time" title="2019-10-15 16:47:22" datetime="2019-10-15T08:47:22.000Z"  itemprop="datePublished">2019-10-15</time>
 
             
 
@@ -189,7 +196,55 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt; </span><br><span class="line">    + 声明文档的解析类型(document.compatMode)，避免浏览器的怪异模式。  </span><br><span class="line">    + 通过document.compatMode查看模式：</span><br><span class="line">        + BackCompat：怪异模式，浏览器使用自己的怪异模式解析渲染页面。</span><br><span class="line">        + CSS1Compat：标准模式，浏览器使用W3C的标准解析渲染页面。        </span><br><span class="line">&lt;html lang=&quot;en/zh-CN&quot;&gt;</span><br><span class="line">    + lang=&quot;en&quot; 向搜索引擎表示该页面是html语言，并且语言为英文网站,并提示浏览器是否进行翻译</span><br><span class="line">    + lang=&quot;zh-CN&quot; 向搜索引擎表示该页面是html语言，并且语言为中文网站</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;/&gt;</span><br><span class="line">    + 声明文档使用的字符编码</span><br><span class="line">&lt;meta name=&quot;viewport&quot;content=&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no&quot;&gt;</span><br><span class="line">    + 移动端布局</span><br><span class="line">&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot;/&gt;</span><br><span class="line">    + 告诉IE浏览器，IE8/9及以后的版本都会以最高版本IE来渲染页面或告诉浏览器用chrome内核来渲染</span><br><span class="line">&lt;meta name=&quot;renderer&quot; content=&quot;webkit&quot;/&gt;</span><br><span class="line">    + 指定双核浏览器默认以何种方式渲染页面</span><br><span class="line">&lt;title&gt;&lt;/title&gt;</span><br><span class="line">    + 标题</span><br><span class="line">&lt;meta name=&quot;description&quot; content=&quot;#[[$description$]]#&quot;/&gt;</span><br><span class="line">    + 描述</span><br><span class="line">&lt;meta name=&quot;keyword&quot; content=&quot;#[[$keyword$]]#&quot;/&gt;</span><br><span class="line">    + 关键字</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;&quot;&gt;</span><br><span class="line">&lt;style type=&quot;text/css&quot;&gt;&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+            <h3 id="一-CSS浮动是什么"><a href="#一-CSS浮动是什么" class="headerlink" title="一.CSS浮动是什么?"></a>一.CSS浮动是什么?</h3><p>css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止</p>
+<h4 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1.相关概念"></a>1.相关概念</h4><ul>
+<li>标准文档流:普通流/文档流</li>
+<li>脱标:脱离标准流</li>
+<li>CSS中一共有三种脱标手段:<a id="more"></a>
+<ul>
+<li>浮动</li>
+<li>绝对定位</li>
+<li>固定定位</li>
+</ul>
+</li>
+<li>网页布局的三种流<ul>
+<li>文档流</li>
+<li>浮动流</li>
+<li>定位流</li>
+</ul>
+</li>
+</ul>
+<h3 id="二-浮动"><a href="#二-浮动" class="headerlink" title="二.浮动"></a>二.浮动</h3><h4 id="1-浮动API"><a href="#1-浮动API" class="headerlink" title="1.浮动API"></a>1.浮动API</h4><p><strong>语法： float : none | left | right</strong></p>
+<ul>
+<li>none:元素不浮动</li>
+<li>left:元素向左浮动</li>
+<li>right:元素向右浮动</li>
+</ul>
+<h4 id="2-浮动规则"><a href="#2-浮动规则" class="headerlink" title="2.浮动规则"></a>2.浮动规则</h4><ul>
+<li>浮动元素位于文档流之上,会遮挡文档流</li>
+<li>如果同为浮动元素,会从左向右/从右向左,自上而下依次排列,会被高度高的浮动元素卡住</li>
+<li>如果上一个元素为文档流中的元素,浮动元素的相对垂直位置不变,与文档流元素底部对齐(浮动元素不会超过它前边未进行浮动元素的底部)        </li>
+<li>浮动流只有一种排版方式,就是水平排版,它只能设置某个元素左对齐或者右对齐,在浮动流中是不可以使用margin: 0 auto;</li>
+<li>如果同一行中左右浮动都存在,位置不够时,右浮动元素的后边元素会向下排列,左浮动先会保持不变,只有当宽度容不下左浮动元素的宽度,左浮动元素才会向下移动</li>
+</ul>
+<h4 id="3-浮动特性"><a href="#3-浮动特性" class="headerlink" title="3.浮动特性"></a>3.浮动特性</h4><ul>
+<li>元素浮动以后变成行内块元素</li>
+<li>元素浮动以后后边如果是行内元素或者行内-块级元素(两者视为文本),浮动元素不会遮挡文本</li>
+<li>元素浮动以后后边如果块级元素(里面包含文本)/块级元素内部包含行内元素或者行内-块级元素,浮动元素不会遮挡<br>文本</li>
+</ul>
+<h3 id="三-清除浮动"><a href="#三-清除浮动" class="headerlink" title="三.清除浮动"></a>三.清除浮动</h3><h4 id="1-清除浮动API"><a href="#1-清除浮动API" class="headerlink" title="1.清除浮动API"></a>1.清除浮动API</h4><p><strong>语法： clear : none | left | right | both</strong></p>
+<ul>
+<li>none:允许两边有浮动元素</li>
+<li>left:不允许左边有浮动元素</li>
+<li>right:不允许右边有浮动元素</li>
+<li>both:不允许两边有浮动元素(左边|右边|两边)</li>
+</ul>
+<h4 id="2-清除浮动规则"><a href="#2-清除浮动规则" class="headerlink" title="2.清除浮动规则"></a>2.清除浮动规则</h4><ul>
+<li>只能作用于块级元素或浮动元素</li>
+<li>浮动只能影响调用它的元素</li>
+<li>清除浮动不能作用域行内/行内-块级元素,因为浮动元素不会遮挡行内/行内-块级元素</li>
+</ul>
+
         </div>
 
         <blockquote class="post-copyright">
@@ -197,7 +252,7 @@
     <div class="content">
         
 <span class="post-time">
-    Last updated: <time datetime="2019-10-13T02:45:49.820Z" itemprop="dateUpdated">2019-10-13 10:45:49</time>
+    Last updated: <time datetime="2019-10-15T08:49:00.635Z" itemprop="dateUpdated">2019-10-15 16:49:00</time>
 </span><br>
 
 
@@ -229,7 +284,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&title=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/15/02CSS浮动/&title=《02CSS浮动》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -239,22 +294,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&title=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&source=程序员就是我,我就是程序元" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/15/02CSS浮动/&title=《02CSS浮动》 — 爱编程-爱挑战-爱学习&source=一.CSS浮动是什么?css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/15/02CSS浮动/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《02CSS浮动》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/15/02CSS浮动/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/15/02CSS浮动/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -277,18 +332,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/10/13/Vue之深入响应式原理/" id="post-prev" class="post-nav-link">
+      <a href="/2019/10/15/三种隐藏元素方法的区别/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Vue之深入响应式原理</h4>
+        <h4 class="title">三种隐藏元素方法的区别</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/10/12/前端高度塌陷问题/" id="post-next" class="post-nav-link">
+      <a href="/2019/10/15/01标准文档流/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">前端高度塌陷问题</h4>
+        <h4 class="title">01标准文档流</h4>
       </a>
     </div>
   
@@ -388,7 +443,7 @@
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&title=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/10/15/02CSS浮动/&title=《02CSS浮动》 — 爱编程-爱挑战-爱学习&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -398,22 +453,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&title=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&source=程序员就是我,我就是程序元" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/10/15/02CSS浮动/&title=《02CSS浮动》 — 爱编程-爱挑战-爱学习&source=一.CSS浮动是什么?css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界..." data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/10/15/02CSS浮动/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《标准网页标签模板及其每个标签的作用》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/&via=http://yoursite.com" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《02CSS浮动》 — 爱编程-爱挑战-爱学习&url=http://yoursite.com/2019/10/15/02CSS浮动/&via=http://yoursite.com" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/12/标准网页标签模板及其每个标签的作用/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/10/15/02CSS浮动/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -424,7 +479,7 @@
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACwElEQVR42u3aQW4bMRAEQP//0wqQU3LQqnuGdIygeDIsYZfFA4fq4ddXPF6/x7v/5J++/hjJp89zODbw8PDwRlN/N56n1TKSKbZvfzdnPDw8vNu85434wyOC3fi5hORLnM8ZDw8P7yfwnifUFoykbODh4eH9H7zZgXgTLqyeiYeHh3eNtznOJvFr/p1ZgTmQteDh4eHFvLYB9hP+vtjfw8PDw1t01ZPgIIkP8k08Ly3Rk/Hw8PAu8NpmVX4JoG2VnXpO9IsBDw8Pb8E71aZqY4XZ0/IS9Vfdw8PDwzvKyyPXdotPJp0vyrElw8PDw1vz9j/+2608P+u2y/2h7uHh4eEd4rVt+E3gm09rFosUtQ4PDw9vwZvFAbMLB6duOuRLj4eHh3ePl//4zyeaHLs3LbFogfDw8PAu85JoIIkS8unuL11F7S48PDy8o7y82Z8XidnxdxZnRIdyPDw8vAu8/XbfNv7P4qM54+Hh4R3itZFB3trPO1Ab6oelxMPDw7vAa1v4m8Kwb5ttrmTh4eHhneLlk0g24iRKyCPaZHE/vBEPDw/vAq/d4tsNvW1lzS5dfXgmHh4e3gXebMPNt/t2ovms6iXGw8PD+xZee2lg1uhaXQvIlxUPDw9vzStS3jhgnQUTs1B4VeXw8PDwRrz8xW1LLI82NsFH1HLDw8PDO8rLt+/N1pyXk1msXNwpw8PDw7vMyz/NS0sb5m5KBR4eHt4N3mYr31wayGOIPLqt4wk8PDy8Ee9VjvaSwb7FNQtz3zbA8PDw8Na8zebbHr73VxMOk/Dw8PAWvNvTbS8c1B28PHHBw8PDO8prM4z8P20AsT92fyUVAw8PD+9beLMXz4pNe9Cvv4SHh4f3T3l5iLCZaHvEx8PDw7vNm8UKzwfoPKhNLl0lb68vEODh4eGNeJsGWPuCHNM+ZzXw8PDwUt4vAStzqFMVz+8AAAAASUVORK5CYII=" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACOklEQVR42u3aS27DMAxFUe9/0+m0QCD7PkoOIOp6FKRurOMBwd914etze/2/5/7+7ztHT7neuGTIkLEtgx+RfP99iNH9HEyeIkOGjBMYowhW+0zw6bMezixDhgwZ+HPtG/JcGTJkyEgZ99+QsFsLzTJkyDiZkbbSOPU+pJLXt7gWlyFDxoYM3nX//edX5hsyZMjYivEJrzeOxcPr8FQyZMhozeABjidnPHULClTyFBkyZBzGWLs8wUvc+5PIkCHjTEYaRvkYkoRIMlpAw04ZMmS0ZvB1h7QoLaZ3a5ctZMiQ0ZSRFqi1dbFa4fqQtsqQIaMpo3ZoHiLJL0ytgs28exkyZGzC4C023pibSfVSJNpxkyFDRgtGOhjgQTBdPyXDg2XzDRkyZGzFIKHzoSmPk7zawlkx25UhQ0YjRm2FlJe7aZOOvLIrjdYyZMjYnEH+gZBqrbT01aBhgwwZMtoxVh09/WttFUOGDBmnMeZXImrRfWaCMVy2kCFDRlNGbQ2LDyzTZlxtpUOGDBknMPjgMG3J1QrUtDkoQ4aMcxh8PJA+IK6q8V9RRJchQ0Y7Rm31obYqEWepZNlChgwZ7Ri19I6kkjxA84ZavNEmQ4aMFoz5plsajnm7bSbdlCFDRj9GGmTTsPujgCtDhowDGGlRuqqhNjMYkCFDhoxa4Xr/y7UEEbXzZMiQIWMi4JJBaTpyGBaxMmTIaM0gRSwfEvBffjgcKLllyJBxAmOmdJwJuyiMltJKGTJkNGL8ARrRIuBkuf8dAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 

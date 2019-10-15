@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-13T02:46:10.014Z</updated>
+  <updated>2019-10-15T08:49:35.557Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>三种隐藏元素方法的区别</title>
+    <link href="http://yoursite.com/2019/10/15/%E4%B8%89%E7%A7%8D%E9%9A%90%E8%97%8F%E5%85%83%E7%B4%A0%E6%96%B9%E6%B3%95%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2019/10/15/三种隐藏元素方法的区别/</id>
+    <published>2019-10-15T08:47:42.000Z</published>
+    <updated>2019-10-15T08:49:35.557Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li><strong>display:none</strong> <ul><li>元素在页面上将消失,不占据页面空间,会导致浏览器的回流与重绘,不能响应交互类事件；<a id="more"></a></li></ul></li><li><strong>visibility:hidden</strong>   <ul><li>元素在页面占据的空间不变,所以它只会导致浏览器重绘而不会回流,也不能响应交互类事件；</li></ul></li><li><strong>opacity:0</strong>    <ul><li>元素在页面占据的空间不变，不会导致浏览器回流或重绘（因为浏览器对于transform和opacity这两种变化处理的方法为合成渲染,可以响应交互类事件。</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;display:none&lt;/strong&gt; &lt;ul&gt;
+&lt;li&gt;元素在页面上将消失,不占据页面空间,会导致浏览器的回流与重绘,不能响应交互类事件；
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>02CSS浮动</title>
+    <link href="http://yoursite.com/2019/10/15/02CSS%E6%B5%AE%E5%8A%A8/"/>
+    <id>http://yoursite.com/2019/10/15/02CSS浮动/</id>
+    <published>2019-10-15T08:47:22.000Z</published>
+    <updated>2019-10-15T08:49:00.635Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="一-CSS浮动是什么"><a href="#一-CSS浮动是什么" class="headerlink" title="一.CSS浮动是什么?"></a>一.CSS浮动是什么?</h3><p>css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止</p><h4 id="1-相关概念"><a href="#1-相关概念" class="headerlink" title="1.相关概念"></a>1.相关概念</h4><ul><li>标准文档流:普通流/文档流</li><li>脱标:脱离标准流</li><li>CSS中一共有三种脱标手段:<a id="more"></a><ul><li>浮动</li><li>绝对定位</li><li>固定定位</li></ul></li><li>网页布局的三种流<ul><li>文档流</li><li>浮动流</li><li>定位流</li></ul></li></ul><h3 id="二-浮动"><a href="#二-浮动" class="headerlink" title="二.浮动"></a>二.浮动</h3><h4 id="1-浮动API"><a href="#1-浮动API" class="headerlink" title="1.浮动API"></a>1.浮动API</h4><p><strong>语法： float : none | left | right</strong></p><ul><li>none:元素不浮动</li><li>left:元素向左浮动</li><li>right:元素向右浮动</li></ul><h4 id="2-浮动规则"><a href="#2-浮动规则" class="headerlink" title="2.浮动规则"></a>2.浮动规则</h4><ul><li>浮动元素位于文档流之上,会遮挡文档流</li><li>如果同为浮动元素,会从左向右/从右向左,自上而下依次排列,会被高度高的浮动元素卡住</li><li>如果上一个元素为文档流中的元素,浮动元素的相对垂直位置不变,与文档流元素底部对齐(浮动元素不会超过它前边未进行浮动元素的底部)        </li><li>浮动流只有一种排版方式,就是水平排版,它只能设置某个元素左对齐或者右对齐,在浮动流中是不可以使用margin: 0 auto;</li><li>如果同一行中左右浮动都存在,位置不够时,右浮动元素的后边元素会向下排列,左浮动先会保持不变,只有当宽度容不下左浮动元素的宽度,左浮动元素才会向下移动</li></ul><h4 id="3-浮动特性"><a href="#3-浮动特性" class="headerlink" title="3.浮动特性"></a>3.浮动特性</h4><ul><li>元素浮动以后变成行内块元素</li><li>元素浮动以后后边如果是行内元素或者行内-块级元素(两者视为文本),浮动元素不会遮挡文本</li><li>元素浮动以后后边如果块级元素(里面包含文本)/块级元素内部包含行内元素或者行内-块级元素,浮动元素不会遮挡<br>文本</li></ul><h3 id="三-清除浮动"><a href="#三-清除浮动" class="headerlink" title="三.清除浮动"></a>三.清除浮动</h3><h4 id="1-清除浮动API"><a href="#1-清除浮动API" class="headerlink" title="1.清除浮动API"></a>1.清除浮动API</h4><p><strong>语法： clear : none | left | right | both</strong></p><ul><li>none:允许两边有浮动元素</li><li>left:不允许左边有浮动元素</li><li>right:不允许右边有浮动元素</li><li>both:不允许两边有浮动元素(左边|右边|两边)</li></ul><h4 id="2-清除浮动规则"><a href="#2-清除浮动规则" class="headerlink" title="2.清除浮动规则"></a>2.清除浮动规则</h4><ul><li>只能作用于块级元素或浮动元素</li><li>浮动只能影响调用它的元素</li><li>清除浮动不能作用域行内/行内-块级元素,因为浮动元素不会遮挡行内/行内-块级元素</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;一-CSS浮动是什么&quot;&gt;&lt;a href=&quot;#一-CSS浮动是什么&quot; class=&quot;headerlink&quot; title=&quot;一.CSS浮动是什么?&quot;&gt;&lt;/a&gt;一.CSS浮动是什么?&lt;/h3&gt;&lt;p&gt;css浮动就是浮动元素会脱离文档的普通流,根据float的值向左或向右移动,直到它的外边界碰到父元素的内边界或另一个浮动元素的外边界为止&lt;/p&gt;
+&lt;h4 id=&quot;1-相关概念&quot;&gt;&lt;a href=&quot;#1-相关概念&quot; class=&quot;headerlink&quot; title=&quot;1.相关概念&quot;&gt;&lt;/a&gt;1.相关概念&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;标准文档流:普通流/文档流&lt;/li&gt;
+&lt;li&gt;脱标:脱离标准流&lt;/li&gt;
+&lt;li&gt;CSS中一共有三种脱标手段:
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>01标准文档流</title>
+    <link href="http://yoursite.com/2019/10/15/01%E6%A0%87%E5%87%86%E6%96%87%E6%A1%A3%E6%B5%81/"/>
+    <id>http://yoursite.com/2019/10/15/01标准文档流/</id>
+    <published>2019-10-15T08:47:05.000Z</published>
+    <updated>2019-10-15T08:48:20.546Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="HTML元素分类"><a href="#HTML元素分类" class="headerlink" title="HTML元素分类"></a>HTML元素分类</h3><ul><li><strong>块级元素</strong><ul><li>独占一行,自上向下排列</li><li>默认宽度为父元素的100%</li><li>默认高度被内容撑开</li><li>可设置高/宽/内边距/外边距<a id="more"></a></li></ul></li><li><strong>行内元素</strong><ul><li>和其他非块级元素在同一行 </li><li>只占自身大小,从左到右,自上向下排列</li><li>宽度和高度被内容撑开</li><li>不可设置高/宽/上下内边距/上下外边距</li></ul></li><li><strong>行内-块级元素</strong>即置换元素<ul><li>和其他非块级元素在同一行</li><li>从左到右,自上向下排列</li><li>可设置高/宽/内边距/外边距</li></ul></li><li><strong>注意事项</strong><ul><li><strong>行内元素</strong>:设置上下内边距,显示效果是增加了,只不过是表象,设置是无效的,对周围元素无任何影响,但设置背景会覆盖周围元素</li><li><strong>行内块级元素</strong>:设置行高会影响同行相同元素类型的行高,与其保持一致</li><li><strong>行内元素/行内-块级元素</strong>:进行页面布局的时候会把空的文本节点计算在内</li><li><strong>置换元素</strong>:是指浏览器根据元素的标签和属性，来决定元素的具体显示内容,<strong>可以设置高宽/内外边距</strong>,性质同设置了display:inline-block的元素一致。而img元素虽然是行内元素 但它也是置换元素<ul><li>html中的<img><input><textarea></textarea><select><object>都是置换元素，这些置换元素往往没有实际内容，即是一个空元素。 </object></select></li><li>例如：浏览器根据<strong>img标</strong>签的src属性显示图片。根据<strong>input标签</strong>的type属性决定显示输入框还是按钮  </li></ul></li><li><strong>非置换元素</strong>:浏览器中的大多数元素都是不可置换元素，即其内容直接展示给浏览器</li><li><strong>h1~h6/p/dt元素</strong>:只能包含行内元素，不能再包含块级元素</li></ul></li></ul><h3 id="块级元素和行内元素的嵌套规范-规则"><a href="#块级元素和行内元素的嵌套规范-规则" class="headerlink" title="块级元素和行内元素的嵌套规范(规则)"></a>块级元素和行内元素的嵌套规范(规则)</h3><ul><li>行内元素可以嵌套行内元素,不可以嵌套块级元素</li><li>块级元素,可以嵌套块级元素,或者是行内元素</li><li>部分块级元素,不能嵌套块级元素,只能嵌套行内元素,如:p、h1-h6、dt(p是真正的不能,其余的是规范的问题)</li><li>块级元素中嵌套的元素,块级元素和块级元素一级,行内元素和行内元素一级</li></ul><h3 id="HTML元素转换API"><a href="#HTML元素转换API" class="headerlink" title="HTML元素转换API"></a>HTML元素转换API</h3><p><strong>语法： display : none | block | inline | inline-block</strong></p><ul><li>none:此元素不会被显示(隐藏渲染)</li><li>block:此元素将显示为块级元素</li><li>inline:此元素将显示为行内元素</li><li>inline-block:此元素将显示为行内-块级元素</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;HTML元素分类&quot;&gt;&lt;a href=&quot;#HTML元素分类&quot; class=&quot;headerlink&quot; title=&quot;HTML元素分类&quot;&gt;&lt;/a&gt;HTML元素分类&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;块级元素&lt;/strong&gt;&lt;ul&gt;
+&lt;li&gt;独占一行,自上向下排列&lt;/li&gt;
+&lt;li&gt;默认宽度为父元素的100%&lt;/li&gt;
+&lt;li&gt;默认高度被内容撑开&lt;/li&gt;
+&lt;li&gt;可设置高/宽/内边距/外边距
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Vue之深入响应式原理</title>
